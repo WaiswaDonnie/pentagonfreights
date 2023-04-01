@@ -12,6 +12,7 @@ function EditProduct() {
     const [status, setStatus] = useState("")
     const [trackingId,setTrackingId] = useState("")
     const [quantity,setQuantity] = useState(null)
+    const [date,setDate] = useState("")
 
 
     React.useEffect(() => {
@@ -23,6 +24,8 @@ function EditProduct() {
         setStatus(productDetails.status)
         setTrackingId(productDetails.productId)
         setQuantity(productDetails.productQuantity)
+        setDate(productDetails.date)
+        console.log("pra",productDetails)
     }, [productDetails])
 
     return (
@@ -52,6 +55,10 @@ function EditProduct() {
                             setQuantity(e)
                         }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Product Quantity" />
                 </div>
+                <div className="my-5 mx-3">
+                        <label>Date</label>
+                        <Input value={date} type="date" onChange={e => { setDate(e); }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Quantity" />
+                    </div>
                 <div className="my-5 mx-3">
                     <label>Customer Name</label>
 
@@ -93,6 +100,7 @@ function EditProduct() {
                                 productDescription: productDescription,
                                 status: status,
                                 productQuantity: quantity,
+                                date:date
                             })
                         }}
                     >{loading ? 'Updating...' : 'Update'}</Button>

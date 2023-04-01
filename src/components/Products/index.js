@@ -6,14 +6,15 @@ import { GlobalContext } from '../../GlobalContext/GlobalContext';
 import EditProduct from '../EditProduct';
 
 function Products() {
-    const {setProductDetails, productId, setProductId, editProduct, addProduct, getProducts, products, user, loading, setVisible, visible } = React.useContext(GlobalContext)
+    const { setProductDetails, productId, setProductId, editProduct, addProduct, getProducts, products, user, loading, setVisible, visible } = React.useContext(GlobalContext)
     const [productName, setProductName] = useState("")
     const [customerName, setCustomerName] = useState("")
     const [productLocation, setProductLocation] = useState("")
     const [customerEmail, setCustomerEmail] = useState("")
     const [productDescription, setProductDescription] = useState("")
     const [status, setStatus] = useState("")
-    const [quantity,setQuantity] = useState(null)
+    const [quantity, setQuantity] = useState(null)
+    const [date, setDate] = useState("")
 
     const handleClose = () => {
         setVisible(!visible)
@@ -23,6 +24,15 @@ function Products() {
         getProducts()
     }, [user])
 
+    function convertTimestamp(timestamp) {
+        let date = timestamp.toDate();
+        let mm = date.getMonth();
+        let dd = date.getDate();
+        let yyyy = date.getFullYear();
+    
+        date = mm + '/' + dd + '/' + yyyy;
+        return date;
+    }
 
     return (
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -55,6 +65,7 @@ function Products() {
                             <th scope="col" class="px-6 py-3">
                                 Customer Email
                             </th>
+                            
                             <th scope="col" class="px-6 py-3">
                                 Tracking ID
                             </th>
@@ -79,6 +90,7 @@ function Products() {
                                     {product?.customerEmail}
 
                                 </td>
+                                
                                 <td class="px-6 py-4">
                                     {product?.productId}
                                 </td>
@@ -117,6 +129,10 @@ function Products() {
                         <Input value={quantity} onChange={e => { setQuantity(e); }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Quantity" />
                     </div>
                     <div className="my-5 mx-3">
+                        <label>Date</label>
+                        <Input value={date} type="date" onChange={e => { setDate(e); }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Quantity" />
+                    </div>
+                    <div className="my-5 mx-3">
                         <label>Customer Name</label>
                         <Input value={customerName} onChange={e => { setCustomerName(e); }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Customer Name" />
                     </div>
@@ -153,14 +169,14 @@ function Products() {
                                     productLocation: productLocation,
                                     productDescription: productDescription,
                                     status: status,
-                                    date: new Date(),
+                                    date: date,
                                     productQuantity: quantity
                                 })
                             }}
                         >{loading ? 'Submitting...' : 'Submit'}</Button>
                         <Button
                             onClick={() => {
-                               setVisible(!visible)
+                                setVisible(!visible)
                             }}
                         >Cancel</Button>
                     </div>

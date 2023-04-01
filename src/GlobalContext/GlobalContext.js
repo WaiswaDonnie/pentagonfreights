@@ -33,7 +33,7 @@ export default function GlobalContextProvider({ children }) {
             customerEmail: newProduct.customerEmail,
             productDescription: newProduct.productDescription,
             status: newProduct.status,
-            date: fullDate,
+            date: newProduct.date,
             productQuantity: newProduct.productQuantity
         })
             .then(res => {
@@ -69,6 +69,7 @@ export default function GlobalContextProvider({ children }) {
             customerEmail: newProduct?.customerEmail,
             productDescription: newProduct?.productDescription,
             status: newProduct?.status,
+            date:newProduct.date
         })
             .then(res => {
                 setProductId(null)
