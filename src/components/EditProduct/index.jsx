@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input } from 'rsuite';
+import { Input,SelectPicker } from 'rsuite';
 import Button from '../Button';
 import { GlobalContext } from '../../GlobalContext/GlobalContext'
 function EditProduct() {
@@ -9,13 +9,14 @@ function EditProduct() {
     const [productLocation, setProductLocation] = useState("")
     const [customerEmail, setCustomerEmail] = useState("")
     const [productDescription, setProductDescription] = useState("")
-    const [status, setStatus] = useState("")
+    const [status, setStatus] = useState(4)
     const [trackingId,setTrackingId] = useState("")
     const [quantity,setQuantity] = useState(null)
     const [date,setDate] = useState("")
 
 
     React.useEffect(() => {
+        console.log("pra",productDetails)
         setProductName(productDetails.productName)
         setCustomerName(productDetails.customerName)
         setProductLocation(productDetails.productLocation)
@@ -25,9 +26,60 @@ function EditProduct() {
         setTrackingId(productDetails.productId)
         setQuantity(productDetails.productQuantity)
         setDate(productDetails.date)
-        console.log("pra",productDetails)
     }, [productDetails])
 
+    const statuses = [
+        {
+            label:'Confirmed Order',
+            value:1,
+            confirmedOrder:true,
+            processingOrder:false,
+            qualityCheck:false,
+            productDispatched:false,
+            productDelivered:false
+
+        },
+        {
+            label:'Processing Order',
+            value:2,
+            confirmedOrder:true,
+            processingOrder:true,
+            qualityCheck:false,
+            productDispatched:false,
+            productDelivered:false
+
+        },
+        {
+            label:'Quality Check',
+            value:3,
+            confirmedOrder:true,
+            processingOrder:true,
+            qualityCheck:true,
+            productDispatched:false,
+            productDelivered:false
+
+        },
+        {
+            label:'Product Dispatched',
+            value:4,
+            confirmedOrder:true,
+            processingOrder:true,
+            qualityCheck:true,
+            productDispatched:true,
+            productDelivered:true
+
+        },
+        {
+            label:'Product Delivered',
+            value:5,
+            confirmedOrder:true,
+            processingOrder:true,
+            qualityCheck:true,
+            productDispatched:true,
+            productDelivered:true
+
+        },
+    ]
     return (
         <div>
 
@@ -78,7 +130,7 @@ function EditProduct() {
                 </div>
                 <div className="my-5 mx-3">
                     <label>Product Status</label>
-                    <Input value={status} onChange={e => { setStatus(e); }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Product Status" />
+                    <SelectPicker data={statuses} block value={status} onChange={e => { setStatus(e); }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Product Status" />
 
                 </div>
 

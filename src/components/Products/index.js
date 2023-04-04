@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 import Button from '../Button';
-import { Input } from 'rsuite';
+import { Input,  } from 'rsuite';
 
 import { GlobalContext } from '../../GlobalContext/GlobalContext';
 import EditProduct from '../EditProduct';
-
+ 
 function Products() {
     const { setProductDetails, productId, setProductId, editProduct, addProduct, getProducts, products, user, loading, setVisible, visible } = React.useContext(GlobalContext)
     const [productName, setProductName] = useState("")
@@ -15,6 +15,7 @@ function Products() {
     const [status, setStatus] = useState("")
     const [quantity, setQuantity] = useState(null)
     const [date, setDate] = useState("")
+
 
     const handleClose = () => {
         setVisible(!visible)

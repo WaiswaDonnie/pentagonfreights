@@ -60,6 +60,9 @@ export default function GlobalContextProvider({ children }) {
                 console.log(error)
             })
     }
+    const deleteProduct = async()=>{
+        deleteDoc(doc(db,'Products','063JAm1p8Eh3Z2C4AVTp'))
+    }
     const editProduct = async (newProduct) => {
         setLoading(true)
         updateDoc(doc(db, 'Products', productId), {
@@ -143,6 +146,7 @@ export default function GlobalContextProvider({ children }) {
                 products,
                 getProducts,
                 visible,
+                deleteProduct,
                 loading,
                 setVisible,
                 editProduct,
